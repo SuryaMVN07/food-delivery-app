@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesto - Checkout</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <div class="navigation">
+        <div class="navigation-logo">
+            <img class="icon" src="images/favicon.png" alt="Fiesto Logo">
+            <h1 class="title">Fiesto</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="index.html"><img src="images/home.png"><span>Home</span></a></li>
+                <li class="nav-item"><a href="menu.html"><img src="images/menu.png"><span>Menu</span></a></li>
+                <li class="nav-item"><a href="cart.html"><img src="images/cart.png"><span>Cart</span></a></li>
+                <li class="nav-item active"><a href="checkout.html"><img src="images/checkout.png"><span>Checkout</span></a></li>
+                <li onclick="openPopup()"><a href="#"><img src="images/person.png"><span class="logged-name">Login</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="checkout-container">
+        <h3>Checkout</h3>
+        <hr>
+        <div class="checkout-items" id="checkoutItems">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <hr>
+        <div class="checkout-summary">
+            <h4>Total ₹<span id="totalAmount">0.00</span></h4>
+            <button type="button" class="checkout-button" onclick="redirectToPayment()">Checkout</button>
+        </div>
+    </div>
+
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <textarea id="address" placeholder="Address for delivery" required></textarea>
+                <button id="loginBtn" type="submit" style="display: inline-block;">Login</button>
+            </form>
+            <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        const stripe = Stripe('your-public-key-here');
+
+        async function processPayment() {
+            // Fetch the cart items from sessionStorage
+            const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || {};
+
+            // Convert cart items to an array of items for Stripe
+            const itemsForStripe = Object.values(cartItems).map(item => ({
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: item.name,
+                    },
+                    unit_amount: item.price * 100, // Amount in cents
+                },
+                quantity: item.count,
+            }));
+
+            // Create a checkout session on the server
+            try {
+                const response = await fetch('/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        items: itemsForStripe,
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to create checkout session');
+                }
+
+                const session = await response.json();
+
+                // Redirect to payment confirmation page
+                window.location.href = `payment.html?sessionId=${session.id}`;
+            } catch (error) {
+                console.error('Error processing payment with Stripe:', error);
+                alert('Error processing payment with Stripe. Please try again later.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkoutItemsContainer = document.getElementById('checkoutItems');
+            const totalAmountElement = document.getElementById('totalAmount');
+            const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || {};
+
+            // Update checkout page with cart items and total amount
+            let totalAmount = 0;
+            for (const key in cartItems) {
+                if (cartItems.hasOwnProperty(key)) {
+                    const item = cartItems[key];
+                    const itemTotal = item.count * parseFloat(item.price); // Calculate item total
+                    totalAmount += itemTotal; // Accumulate total amount
+                    checkoutItemsContainer.innerHTML += `
+                        <div>
+                            <span>${item.name}</span>
+                            <span>Quantity: ${item.count}</span>
+                            <span>Price: ₹ ${item.price}</span>
+                        </div>
+                    `;
+                }
+            }
+            totalAmountElement.textContent = `₹${totalAmount.toFixed(2)}`; // Display total amount
+        });
+
+        function redirectToPayment() {
+            processPayment();
+        }
+    </script>
+</body>
+</html>

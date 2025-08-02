@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesto</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="navigation">
+        <div class="navigation-logo">
+            <img class="icon" src="images/favicon.png" alt="Fiesto Logo">
+            <h1 class="title">Fiesto</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="index.html"><img src="images/home.png"><span>Home</span></a></li>
+                <li class="nav-item"><a href="menu.html"><img src="images/menu.png"><span>Menu</span></a></li>
+                <li class="nav-item"><a href="cart.html"><img src="images/cart.png"><span>Cart</span></a></li>
+                <li class="nav-item"><a href="checkout.html"><img src="images/checkout.png"><span>Checkout</span></a>
+                </li>
+                <li onclick="openPopup()"><a href="#"><img src="images/person.png"><span
+                            class="logged-name">Login</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="menu-container">
+        <div class="sidebar">
+            <h2>Filter</h2>
+            <ul>
+                <li onclick="filterItems('All')">All</li>
+                <li onclick="filterItems('starters')">Starters</li>
+                <li onclick="filterItems('pizzas')">Pizzas</li>
+                <li onclick="filterItems('pastas')">Pastas</li>
+                <li onclick="filterItems('burgers')">Burgers</li>
+                <li onclick="filterItems('fries')">Fries</li>
+                <li onclick="filterItems('dessert')">Dessert</li>
+            </ul>
+        </div>
+        <div class="categories">
+            <div class="all-items">
+                <div class="card pizzas" data-index="0">
+                    <div class="card-image">
+                        <img src="images/f1.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Stuffed Crust Pizza</div>
+                        <div class="card-price">₹ 290</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card burgers" data-index="1">
+                    <div class="card-image">
+                        <img src="images/f2.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Burger Dungeon</div>
+                        <div class="card-price">₹ 350</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card pizzas" data-index="2">
+                    <div class="card-image">
+                        <img src="images/f3.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Oyster Mushroom</div>
+                        <div class="card-price">₹ 290</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card pizzas" data-index="3">
+                    <div class="card-image">
+                        <img src="images/f4.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Danish Chicken Pizza</div>
+                        <div class="card-price">₹ 279</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card burgers" data-index="4">
+                    <div class="card-image">
+                        <img src="images/f5.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Food Name</div>
+                        <div class="card-price">Price: ₹ X.XX</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card burgers" data-index="5">
+                    <div class="card-image">
+                        <img src="images/f6.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Food Name</div>
+                        <div class="card-price">Price: ₹ X.XX</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card pastas" data-index="6">
+                    <div class="card-image">
+                        <img src="images/f7.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Food Name</div>
+                        <div class="card-price">Price: ₹ X.XX</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card pastas" data-index="7">
+                    <div class="card-image">
+                        <img src="images/f8.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Food Name</div>
+                        <div class="card-price">Price: ₹ X.XX</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card fries" data-index="8">
+                    <div class="card-image">
+                        <img src="images/f9.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Food Name</div>
+                        <div class="card-price">Price: ₹ X.XX</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card fries" data-index="9">
+                    <div class="card-image">
+                        <img src="images/f10.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Food Name</div>
+                        <div class="card-price">Price: ₹ X.XX</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card fries" data-index="10">
+                    <div class="card-image">
+                        <img src="images/f11.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Food Name</div>
+                        <div class="card-price">Price: ₹ X.XX</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card fries" data-index="11">
+                    <div class="card-image">
+                        <img src="images/f12.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Food Name</div>
+                        <div class="card-price">Price: ₹ X.XX</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <textarea id="address" placeholder="Address for delivery" required></textarea>
+                <button id="loginBtn" type="submit" style="display: inline-block;">Login</button>
+            </form>
+            <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const plusButtons = document.querySelectorAll('.plus-btn');
+            const minusButtons = document.querySelectorAll('.minus-btn');
+            const itemCounts = document.querySelectorAll('.item-count');
+            let cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || {};
+
+            function updateCart() {
+                sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+            }
+
+            function updateCheckout() {
+                let checkoutItems = Object.values(cartItems).map(item => `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.price}</td>
+                        <td>${item.count}</td>
+                    </tr>
+                `).join('');
+                sessionStorage.setItem('checkoutItems', JSON.stringify(checkoutItems));
+            }
+
+            plusButtons.forEach((button, index) => {
+                button.addEventListener('click', function () {
+                    let itemCount = itemCounts[index];
+                    let currentCount = parseInt(itemCount.textContent, 10);
+                    itemCount.textContent = currentCount + 1;
+
+                    let card = button.closest('.card');
+                    let itemName = card.querySelector('.card-title').textContent;
+                    let itemPrice = card.querySelector('.card-price').textContent;
+
+                    if (cartItems[index]) {
+                        cartItems[index].count += 1;
+                    } else {
+                        cartItems[index] = {
+                            name: itemName,
+                            price: itemPrice,
+                            count: 1
+                        };
+                    }
+
+                    updateCart();
+                    updateCheckout();
+                });
+            });
+
+            minusButtons.forEach((button, index) => {
+                button.addEventListener('click', function () {
+                    let itemCount = itemCounts[index];
+                    let currentCount = parseInt(itemCount.textContent, 10);
+                    if (currentCount > 0) {
+                        itemCount.textContent = currentCount - 1;
+
+                        if (cartItems[index]) {
+                            cartItems[index].count -= 1;
+                            if (cartItems[index].count === 0) {
+                                delete cartItems[index];
+                            }
+                        }
+
+                        updateCart();
+                        updateCheckout();
+                    }
+                });
+            });
+
+            // Load cart items from sessionStorage if available
+            if (Object.keys(cartItems).length > 0) {
+                Object.keys(cartItems).forEach(index => {
+                    itemCounts[index].textContent = cartItems[index].count;
+                });
+            }
+        });
+
+        function filterItems(category) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (category === 'All' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        const loginPopup = document.getElementById('loginPopup');
+
+        function openPopup() {
+            loginPopup.style.display = 'block';
+        }
+
+        function closePopup() {
+            loginPopup.style.display = 'none';
+        }
+
+        window.addEventListener('click', function (event) {
+            if (event.target === loginPopup) {
+                loginPopup.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

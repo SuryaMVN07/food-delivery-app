@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesto with Blockchain Security</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+</head>
+
+<body>
+    <div class="navigation">
+        <div class="navigation-logo">
+            <img class="icon" src="images/favicon.png" alt="Fiesto Logo">
+            <h1 class="title">Fiesto</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="index.html"><img src="images/home.png"><span>Home</span></a></li>
+                <li class="nav-item"><a href="menu.html"><img src="images/menu.png"><span>Menu</span></a></li>
+                <li class="nav-item"><a href="cart.html"><img src="images/cart.png"><span>Cart</span></a></li>
+                <li class="nav-item"><a href="checkout.html"><img src="images/checkout.png"><span>Checkout</span></a></li>
+                <li onclick="openPopup()"><a href="#"><img src="images/person.png"><span class="logged-name">Login</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="home-container">
+        <div class="home-1">
+            <h2>Delicious Food, Delivered Fresh</h2>
+            <p>Order online and enjoy our mouth-watering dishes!</p>
+            <a href="menu.html" class="explore-button">Explore Menu</a>
+        </div>
+        <div class="home-2">
+            <p>At Fiesto, we value quality, convenience, and customer satisfaction above all else.</p>
+        </div>
+    </div>
+
+    <div class="about-container">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Welcome to Fiesto - your go-to destination for delicious food delivered right to your doorstep! At Fiesto, we believe in providing our customers with the finest culinary experiences, crafted with passion and care.</p>
+        </div>
+    </div>
+
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <textarea id="address" placeholder="Address for delivery" required></textarea>
+                <button id="loginBtn" type="submit" style="display: inline-block;">Login</button>
+            </form>
+            <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+        const contractAddress = 'YOUR_CONTRACT_ADDRESS';
+        const contractABI = [/* ABI array here */];
+        const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+        async function placeOrder(amount) {
+            const accounts = await web3.eth.getAccounts();
+            await contract.methods.placeOrder().send({ from: accounts[0], value: web3.utils.toWei(amount, 'ether') });
+        }
+
+        async function deliverOrder(userAddress) {
+            const accounts = await web3.eth.getAccounts();
+            await contract.methods.deliverOrder(userAddress).send({ from: accounts[0] });
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const amount = prompt("Enter order amount in ETH:");
+            if (amount) {
+                await placeOrder(amount);
+                alert('Order placed successfully!');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesto - Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <!-- Add any additional styles or scripts here -->
+</head>
+<body>
+    <div class="navigation">
+        <!-- Navigation bar if needed -->
+    </div>
+    
+    <div class="payment-container">
+        <h3>Payment Details</h3>
+        <hr>
+        <div id="paymentStatus">
+            <!-- Payment status and details will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code to handle payment confirmation
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('sessionId');
+
+            if (!sessionId) {
+                // Handle error if sessionId is not provided
+                document.getElementById('paymentStatus').innerHTML = '<p>Error: Session ID not found.</p>';
+                return;
+            }
+
+            // Fetch checkout session details from server or Stripe directly
+            try {
+                const response = await fetch(`/retrieve-checkout-session?sessionId=${sessionId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch checkout session details.');
+                }
+                const session = await response.json();
+
+                // Display payment success message or any other details
+                document.getElementById('paymentStatus').innerHTML = `
+                    <p>Payment successful!</p>
+                    <p>Order ID: ${session.payment_intent.id}</p>
+                    <p>Amount: ${session.payment_intent.amount / 100} ${session.payment_intent.currency.toUpperCase()}</p>
+                    <!-- Add more details as needed -->
+                `;
+            } catch (error) {
+                console.error('Error fetching checkout session:', error);
+                document.getElementById('paymentStatus').innerHTML = '<p>Error fetching checkout session details.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
