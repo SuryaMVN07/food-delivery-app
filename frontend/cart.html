@@ -89,17 +89,13 @@
                     `;
                     cartItemsList.appendChild(listItem);
 
-                    // Calculate total amount
                     const itemPriceStr = String(item.price).replace(/[^\d.]/g, '');
                     const itemPrice = parseFloat(itemPriceStr);
                     totalAmount += item.count * itemPrice;
                 }
             }
-
-            // Display total amount with 2 decimal places
             totalAmountContainer.textContent = `₹${totalAmount.toFixed(2)}`;
 
-            // Show message if cart is empty
             if (Object.keys(cartItems).length === 0) {
                 cartItemsList.style.display = 'block';
                 cartItemsList.innerHTML = `
@@ -117,7 +113,6 @@
             }
         }
 
-        // Load cart items when the page is loaded
         document.addEventListener("DOMContentLoaded", loadCartItems);
     </script>
 </body>
