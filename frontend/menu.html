@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesto</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="navigation">
+        <div class="navigation-logo">
+            <img class="icon" src="images/favicon.png" alt="Fiesto Logo">
+            <h1 class="title">Fiesto</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="index.html"><img src="images/home.png"><span>Home</span></a></li>
+                <li class="nav-item"><a href="menu.html"><img src="images/menu.png"><span>Menu</span></a></li>
+                <li class="nav-item"><a href="cart.html"><img src="images/cart.png"><span>Cart</span></a></li>
+                <li class="nav-item"><a href="checkout.html"><img src="images/checkout.png"><span>Checkout</span></a>
+                </li>
+                <li onclick="openPopup()"><a href="#"><img src="images/person.png"><span
+                            class="logged-name">Login</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="menu-container">
+        <div class="sidebar">
+            <h2>Filter</h2>
+            <ul>
+                <li onclick="filterItems('All')">All</li>
+                <li onclick="filterItems('starters')">Starters</li>
+                <li onclick="filterItems('pizzas')">Pizzas</li>
+                <li onclick="filterItems('pastas')">Pastas</li>
+                <li onclick="filterItems('burgers')">Burgers</li>
+                <li onclick="filterItems('fries')">Fries</li>
+                <li onclick="filterItems('dessert')">Dessert</li>
+            </ul>
+        </div>
+        <div class="categories">
+            <div class="all-items">
+                <div class="card pizzas" data-index="0">
+                    <div class="card-image">
+                        <img src="images/f1.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Stuffed Crust Pizza</div>
+                        <div class="card-price">₹ 290</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card burgers" data-index="1">
+                    <div class="card-image">
+                        <img src="images/f2.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Burger Dungeon</div>
+                        <div class="card-price">₹ 350</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card pizzas" data-index="2">
+                    <div class="card-image">
+                        <img src="images/f3.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Oyster Mushroom</div>
+                        <div class="card-price">₹ 290</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card pizzas" data-index="3">
+                    <div class="card-image">
+                        <img src="images/f4.png" alt="Food 1">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Danish Chicken Pizza</div>
+                        <div class="card-price">₹ 279</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card burgers" data-index="4">
+                    <div class="card-image">
+                        <img src="images/f5.png" alt="French Fries">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Truffle Fries</div>
+                        <div class="card-price">₹ 180</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card pizzas" data-index="5">
+                    <div class="card-image">
+                        <img src="images/f6.png" alt="Margherita Pizza">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Classic Margherita</div>
+                        <div class="card-price">₹ 320</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card burgers" data-index="6">
+                    <div class="card-image">
+                        <img src="images/f7.png" alt="Double Bacon Burger">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Double Bacon Smash</div>
+                        <div class="card-price">₹ 450</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card burgers" data-index="7">
+                    <div class="card-image">
+                        <img src="images/f8.png" alt="Chicken Burger">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Spicy Chicken Filet</div>
+                        <div class="card-price">₹ 380</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card pastas" data-index="8">
+                    <div class="card-image">
+                        <img src="images/f9.png" alt="Penne Pasta">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Penne Arrabbiata</div>
+                        <div class="card-price">₹ 260</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card fries" data-index="9">
+                    <div class="card-image">
+                        <img src="images/f10.png" alt="Loaded Nachos">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Loaded Beef Nachos</div>
+                        <div class="card-price">₹ 310</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card fries" data-index="10">
+                    <div class="card-image">
+                        <img src="images/f11.png" alt="Onion Rings">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Crispy Onion Rings</div>
+                        <div class="card-price">₹ 140</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card fries" data-index="11">
+                    <div class="card-image">
+                        <img src="images/f12.png" alt="Garlic Bread">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Cheesy Garlic Bread</div>
+                        <div class="card-price">₹ 190</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Items -->
+                <div class="card dessert" data-index="12">
+                    <div class="card-image">
+                        <img src="images/f2.png" alt="Chocolate Cake"> <!-- Reusing an image -->
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Molten Lava Cake</div>
+                        <div class="card-price">₹ 220</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card dessert" data-index="13">
+                    <div class="card-image">
+                        <img src="images/f3.png" alt="Vanilla Ice Cream">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Madagascar Vanilla Sundae</div>
+                        <div class="card-price">₹ 180</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card dessert" data-index="14">
+                    <div class="card-image">
+                        <img src="images/f4.png" alt="Cheesecake">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">New York Cheesecake</div>
+                        <div class="card-price">₹ 280</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card dessert" data-index="15">
+                    <div class="card-image">
+                        <img src="images/f1.png" alt="Brownie">
+                    </div>
+                    <div class="card-details">
+                        <div class="card-title">Fudge Brownie</div>
+                        <div class="card-price">₹ 150</div>
+                        <div class="card-add">
+                            <button class="btn minus-btn">-</button>
+                            <span class="item-count">0</span>
+                            <button class="btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <textarea id="address" placeholder="Address for delivery" required></textarea>
+                <button id="loginBtn" type="submit" style="display: inline-block;">Login</button>
+            </form>
+            <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+        </div>
+    </div>
+
+    <footer
+        style="margin-top: 4rem; padding: 2rem; border-top: 1px solid var(--border); background: var(--bg-card); text-align: center; color: var(--text-muted);">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 1rem;">
+            <img src="images/favicon.png" alt="Fiesto Logo" style="height: 30px; filter: grayscale(1);">
+            <h2 style="margin: 0; color: var(--text-main); font-size: 1.2rem;">Fiesto</h2>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem;">&copy; 2024 Fiesto Delivery. All rights reserved.</p>
+        <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 15px; font-size: 0.85rem;">
+            <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a> |
+            <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script src="utils.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const plusButtons = document.querySelectorAll('.plus-btn');
+            const minusButtons = document.querySelectorAll('.minus-btn');
+            const itemCounts = document.querySelectorAll('.item-count');
+            let cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || {};
+
+            function updateCart() {
+                sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+            }
+
+            function updateCheckout() {
+                let checkoutItems = Object.values(cartItems).map(item => `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.price}</td>
+                        <td>${item.count}</td>
+                    </tr>
+                `).join('');
+                sessionStorage.setItem('checkoutItems', JSON.stringify(checkoutItems));
+            }
+
+            plusButtons.forEach((button, index) => {
+                button.addEventListener('click', function () {
+                    let itemCount = itemCounts[index];
+                    let currentCount = parseInt(itemCount.textContent, 10);
+                    itemCount.textContent = currentCount + 1;
+
+                    let card = button.closest('.card');
+                    let itemName = card.querySelector('.card-title').textContent;
+                    let itemPrice = card.querySelector('.card-price').textContent;
+
+                    if (cartItems[index]) {
+                        cartItems[index].count += 1;
+                    } else {
+                        // Remove prefix 'Price: ' and double currency symbols
+                        let cleanPrice = itemPrice.replace('Price: ', '').replace('₹', '').replace('₹', '').trim();
+                        cartItems[index] = {
+                            name: itemName,
+                            price: cleanPrice,
+                            count: 1
+                        };
+                    }
+
+                    updateCart();
+                    updateCheckout();
+                });
+            });
+
+            minusButtons.forEach((button, index) => {
+                button.addEventListener('click', function () {
+                    let itemCount = itemCounts[index];
+                    let currentCount = parseInt(itemCount.textContent, 10);
+                    if (currentCount > 0) {
+                        itemCount.textContent = currentCount - 1;
+
+                        if (cartItems[index]) {
+                            cartItems[index].count -= 1;
+                            if (cartItems[index].count === 0) {
+                                delete cartItems[index];
+                            }
+                        }
+
+                        updateCart();
+                        updateCheckout();
+                    }
+                });
+            });
+
+            // Load cart items from sessionStorage if available
+            if (Object.keys(cartItems).length > 0) {
+                Object.keys(cartItems).forEach(index => {
+                    itemCounts[index].textContent = cartItems[index].count;
+                });
+            }
+        });
+
+        function filterItems(category) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (category === 'All' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>
