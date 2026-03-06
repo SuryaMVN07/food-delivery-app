@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesto - Checkout</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+</head>
+
+<body>
+    <div class="navigation">
+        <div class="navigation-logo">
+            <img class="icon" src="images/favicon.png" alt="Fiesto Logo">
+            <h1 class="title">Fiesto</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="index.html"><img src="images/home.png"><span>Home</span></a></li>
+                <li class="nav-item"><a href="menu.html"><img src="images/menu.png"><span>Menu</span></a></li>
+                <li class="nav-item"><a href="cart.html"><img src="images/cart.png"><span>Cart</span></a></li>
+                <li class="nav-item active"><a href="checkout.html"><img
+                            src="images/checkout.png"><span>Checkout</span></a></li>
+                <li onclick="openPopup()"><a href="#"><img src="images/person.png"><span
+                            class="logged-name">Login</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="checkout-container">
+        <h3>CHECKOUT SUMMARY</h3>
+        <hr>
+        <div class="checkout-items" id="checkoutItems">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <hr>
+        <div class="checkout-summary" id="checkoutSummaryContainer">
+            <h4>Total ₹<span id="totalAmount">0.00</span></h4>
+            <button type="button" class="checkout-button" onclick="redirectToPayment()">Checkout</button>
+        </div>
+    </div>
+
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <textarea id="address" placeholder="Address for delivery" required></textarea>
+                <button id="loginBtn" type="submit" style="display: inline-block;">Login</button>
+            </form>
+            <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+        </div>
+    </div>
+
+    <footer
+        style="margin-top: 4rem; padding: 2rem; border-top: 1px solid var(--border); background: var(--bg-card); text-align: center; color: var(--text-muted);">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 1rem;">
+            <img src="images/favicon.png" alt="Fiesto Logo" style="height: 30px; filter: grayscale(1);">
+            <h2 style="margin: 0; color: var(--text-main); font-size: 1.2rem;">Fiesto</h2>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem;">&copy; 2024 Fiesto Delivery. All rights reserved.</p>
+        <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 15px; font-size: 0.85rem;">
+            <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a> |
+            <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script src="utils.js"></script>
+    <script>
+        async function processPayment() {
+            sessionStorage.removeItem('cartItems');
+            window.location.href = "payment.html?sessionId=mock_session_123";
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkoutItemsContainer = document.getElementById('checkoutItems');
+            const totalAmountElement = document.getElementById('totalAmount');
+            const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || {};
+
+            // Update checkout page with cart items and total amount
+            let totalAmount = 0;
+            if (Object.keys(cartItems).length === 0) {
+                checkoutItemsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2rem 0;">
+                        <img src="images/checkout.png" alt="Empty Checkout" style="height: 60px; filter: invert(1) opacity(0.5); margin-bottom: 1rem;"/>
+                        <h4 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 1.4rem;">No items to checkout</h4>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Your cart is empty. Please add items before proceeding.</p>
+                        <a href="menu.html" class="checkout-button" style="text-decoration: none; display: inline-block;">Browse Menu</a>
+                    </div>
+                `;
+                document.getElementById('checkoutSummaryContainer').style.display = 'none';
+                totalAmountElement.parentElement.style.display = 'none';
+            } else {
+                for (const key in cartItems) {
+                    if (cartItems.hasOwnProperty(key)) {
+                        const item = cartItems[key];
+                        const itemPriceStr = String(item.price).replace(/[^\d.]/g, '');
+                        const itemPrice = parseFloat(itemPriceStr);
+                        const itemTotal = item.count * itemPrice; // Calculate item total
+                        totalAmount += itemTotal; // Accumulate total amount
+                        checkoutItemsContainer.innerHTML += `
+                            <div>
+                                <span>${item.name}</span>
+                                <span>Quantity: ${item.count}</span>
+                                <span>Price: ₹ ${itemPriceStr}</span>
+                            </div>
+                        `;
+                    }
+                }
+                totalAmountElement.textContent = `₹${totalAmount.toFixed(2)}`; // Display total amount
+            }
+        });
+
+        function redirectToPayment() {
+            processPayment();
+        }
+    </script>
+</body>
+
+</html>

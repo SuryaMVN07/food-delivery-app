@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesto - Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <!-- Add any additional styles or scripts here -->
+</head>
+
+<body>
+    <div class="navigation">
+        <div class="navigation-logo">
+            <img class="icon" src="images/favicon.png" alt="Fiesto Logo">
+            <h1 class="title">Fiesto</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="index.html"><img src="images/home.png"><span>Home</span></a></li>
+                <li class="nav-item"><a href="menu.html"><img src="images/menu.png"><span>Menu</span></a></li>
+                <li class="nav-item"><a href="cart.html"><img src="images/cart.png"><span>Cart</span></a></li>
+                <li class="nav-item"><a href="checkout.html"><img src="images/checkout.png"><span>Checkout</span></a>
+                </li>
+                <li onclick="openPopup()"><a href="#"><img src="images/person.png"><span
+                            class="logged-name">Login</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="cart-container" style="text-align: center; margin-top: 4rem;">
+        <h3>PAYMENT PORTAL</h3>
+        <hr>
+        <div id="paymentStatus" style="padding: 2rem;">
+            <!-- Payment status and details will be displayed here -->
+            <img src="images/checkout.png" alt="Payment"
+                style="height: 60px; filter: invert(1) opacity(0.5); margin-bottom: 1rem;" />
+            <h4 style="color: var(--text-main); margin-bottom: 0.5rem; font-size: 1.4rem;">Processing Your
+                Transaction...</h4>
+        </div>
+    </div>
+
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <textarea id="address" placeholder="Address for delivery" required></textarea>
+                <button id="loginBtn" type="submit" style="display: inline-block;">Login</button>
+            </form>
+            <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+        </div>
+    </div>
+
+    <footer
+        style="margin-top: 4rem; padding: 2rem; border-top: 1px solid var(--border); background: var(--bg-card); text-align: center; color: var(--text-muted);">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 1rem;">
+            <img src="images/favicon.png" alt="Fiesto Logo" style="height: 30px; filter: grayscale(1);">
+            <h2 style="margin: 0; color: var(--text-main); font-size: 1.2rem;">Fiesto</h2>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem;">&copy; 2024 Fiesto Delivery. All rights reserved.</p>
+        <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 15px; font-size: 0.85rem;">
+            <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a> |
+            <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript code to handle payment confirmation
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('sessionId');
+
+            if (!sessionId) {
+                // Handle error if sessionId is not provided
+                document.getElementById('paymentStatus').innerHTML = '<p>Error: Session ID not found.</p>';
+                return;
+            }
+
+            if (sessionId === 'mock_session_123') {
+                // Mock Display payment success message
+                document.getElementById('paymentStatus').innerHTML = `
+                    <img src="images/checkout.png" alt="Success" style="height: 60px; filter: invert(0.6) sepia(1) saturate(5) hue-rotate(80deg); margin-bottom: 1rem;"/>
+                    <h4 style="color: #4cd137; margin-bottom: 0.5rem; font-size: 1.4rem;">Payment Successful!</h4>
+                    <p style="color: var(--text-muted);">Order ID: mock_txn_987654321</p>
+                    <p style="color: var(--text-main); font-size: 1.2rem; font-weight: bold; margin-top: 1rem;">Your order is being prepared!</p>
+                    <a href="index.html" class="checkout-button" style="text-decoration: none; display: inline-block; margin-top: 1.5rem;">Return Home</a>
+                `;
+            } else {
+                document.getElementById('paymentStatus').innerHTML = `
+                    <h4 style="color: #e84118; margin-bottom: 0.5rem; font-size: 1.4rem;">Payment Verification Failed</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">There was an error verifying your transaction. Please try again or contact support.</p>
+                    <a href="checkout.html" class="checkout-button" style="text-decoration: none; display: inline-block;">Return to Checkout</a>
+                `;
+            }
+        });
+    </script>
+    <script src="utils.js"></script>
+</body>
+
+</html>
