@@ -1,3 +1,6 @@
+// utils.js - Shared utilities for Fiesto
+
+// --- Popup Logic ---
 let loginPopup = null;
 
 function initPopup() {
@@ -15,6 +18,7 @@ function initPopup() {
         loginForm.addEventListener('submit', login);
     }
 
+    // Check login state on load
     const savedUser = sessionStorage.getItem('fiestoUser');
     if (savedUser) {
         updateUILoggedIn(savedUser);
@@ -75,5 +79,6 @@ function logout() {
 
     closePopup();
 }
-document.addEventListener('DOMContentLoaded', initPopup);
 
+// Initialize popup logic when DOM is loaded
+document.addEventListener('DOMContentLoaded', initPopup);
