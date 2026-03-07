@@ -33,7 +33,6 @@
         <h3>CHECKOUT SUMMARY</h3>
         <hr>
         <div class="checkout-items" id="checkoutItems">
-            <!-- Cart items will be dynamically inserted here -->
         </div>
         <hr>
         <div class="checkout-summary" id="checkoutSummaryContainer">
@@ -81,7 +80,6 @@
             const totalAmountElement = document.getElementById('totalAmount');
             const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || {};
 
-            // Update checkout page with cart items and total amount
             let totalAmount = 0;
             if (Object.keys(cartItems).length === 0) {
                 checkoutItemsContainer.innerHTML = `
@@ -100,8 +98,8 @@
                         const item = cartItems[key];
                         const itemPriceStr = String(item.price).replace(/[^\d.]/g, '');
                         const itemPrice = parseFloat(itemPriceStr);
-                        const itemTotal = item.count * itemPrice; // Calculate item total
-                        totalAmount += itemTotal; // Accumulate total amount
+                        const itemTotal = item.count * itemPrice; 
+                        totalAmount += itemTotal; 
                         checkoutItemsContainer.innerHTML += `
                             <div>
                                 <span>${item.name}</span>
@@ -111,7 +109,7 @@
                         `;
                     }
                 }
-                totalAmountElement.textContent = `₹${totalAmount.toFixed(2)}`; // Display total amount
+                totalAmountElement.textContent = `₹${totalAmount.toFixed(2)}`;
             }
         });
 
