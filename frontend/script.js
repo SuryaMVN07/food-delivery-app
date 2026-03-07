@@ -1,7 +1,10 @@
-const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-const contractAddress = 'YOUR_CONTRACT_ADDRESS';
-const contractABI = [/* ABI array here */];
-const contract = new web3.eth.Contract(contractABI, contractAddress);
+let web3, contract;
+if (typeof Web3 !== 'undefined') {
+    web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    const contractAddress = 'YOUR_CONTRACT_ADDRESS';
+    const contractABI = [/* ABI array here */];
+    contract = new web3.eth.Contract(contractABI, contractAddress);
+}
 
 async function processPayment() {
     alert('Web3 Payment mock successful! In a real app, this would deduct ETH from your wallet.');
@@ -9,7 +12,10 @@ async function processPayment() {
     window.location.href = 'index.html';
 }
 
-const stripe = Stripe('your-public-key-here');
+let stripe;
+if (typeof Stripe !== 'undefined') {
+    stripe = Stripe('your-public-key-here');
+}
 
 async function processPaymentWithStripe() {
     alert('Stripe Payment mock successful! In a real app, this would redirect to a checkout session.');
