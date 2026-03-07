@@ -71,7 +71,7 @@
         function loadCartItems() {
             const cartItemsList = document.getElementById("cartItemsList");
             const totalAmountContainer = document.getElementById("totalAmount");
-            cartItemsList.innerHTML = ""; // Clear existing list items
+            cartItemsList.innerHTML = ""; 
             let totalAmount = 0;
 
             const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || {};
@@ -94,6 +94,7 @@
                     totalAmount += item.count * itemPrice;
                 }
             }
+
             totalAmountContainer.textContent = `₹${totalAmount.toFixed(2)}`;
 
             if (Object.keys(cartItems).length === 0) {
@@ -113,6 +114,7 @@
             }
         }
 
+        // Load cart items when the page is loaded
         document.addEventListener("DOMContentLoaded", loadCartItems);
     </script>
 </body>
